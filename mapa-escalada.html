@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mapa Interactivo de Escalada</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map { height: 100vh; }
+    .popup-content { font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('map').setView([42.0, 2.0], 5);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    const locations = [
+      { coords: [41.3031, 2.0021], title: "Sharma Climbing Gavà", content: "<b>Sharma Climbing Gavà</b><br>Gimnasio moderno con zonas de boulder, cuerda y vías de escalada. Visitado por el grupo." },
+      { coords: [41.3649, 2.1376], title: "Climbat La Foixarda", content: "<b>Climbat La Foixarda</b><br>Centro de referencia en Barcelona para escalada indoor." },
+      { coords: [41.5912, 1.8556], title: "Montserrat", content: "<b>Montserrat</b><br>Zona icónica de escalada al aire libre en Cataluña." },
+      { coords: [41.2669, 0.9795], title: "Siurana", content: "<b>Siurana</b><br>Famoso por sus rutas técnicas y vistas espectaculares." },
+      { coords: [41.2706, 0.8439], title: "Margalef", content: "<b>Margalef</b><br>Destacado por su roca calcárea y variedad de rutas." },
+      { coords: [42.1082, 1.3154], title: "Oliana", content: "<b>Oliana</b><br>Conocido por rutas exigentes y nivel internacional." },
+      { coords: [42.2306, 1.7355], title: "Pedraforca", content: "<b>Pedraforca</b><br>Montaña simbólica y muy popular para escaladores catalanes." },
+      { coords: [54.9784, -1.6174], title: "Newcastle, UK", content: "<b>Newcastle</b><br>Ciudad natal de Eva Wattson. Practicaba bouldering indoor allí debido al clima." },
+      { coords: [37.7335, -119.6376], title: "Yosemite, El Capitan (USA)", content: "<b>El Capitan</b><br>Lugar histórico en la escalada mundial. Referencia mencionada en el proyecto." }
+    ];
+
+    locations.forEach(loc => {
+      L.marker(loc.coords)
+        .addTo(map)
+        .bindPopup(`<div class='popup-content'>${loc.content}</div>`);
+    });
+  </script>
+</body>
+</html>
